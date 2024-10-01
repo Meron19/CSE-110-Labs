@@ -1,8 +1,12 @@
+body {
+    font-size: 28px;
+}
 
  .section1 {
     display: inline-block;
     max-width: 100%;
     background-color: rgb(245, 240, 230);
+    padding: 15px;
 
 
 }
@@ -12,26 +16,30 @@
     max-width: 100%;
     background-image: url(https://www.ucsd.edu/_resources/img/bg-orbs-1.jpg);
     color: white;
+    padding: 15px;
 
 
 }
 
 /* fix my nav bar so that my section 3 is to the right of section 2 instead of below section 1 */
 
-.nav {
+.header {
     position: sticky;
     top: 0;
     background-color: #ffffff;
     font-size: 28px;
+    width: 100%;
   }
+
+.logo {
+    max-width: 400px;
+}
   
 ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
     overflow: hidden;
-    background-color: #ffffff;
-    font-size: 28px;
 
   }
   
@@ -56,7 +64,7 @@ ul {
   }
 
   
-.section3 {
+  .section3 {
     display: inline-block;
     max-width: 100%;
     background-color: rgb(245, 240, 230);
@@ -64,30 +72,38 @@ ul {
 
 .grid-container {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-gap: 25px;
-    justify-content: center;
-    align-items: center;
+    grid-template-columns: auto auto auto auto;
+    gap: 25px;
+    padding: 10px;
+  }
+
+.grid-container > div {
+    background-color: #182b49;
+    color: white;
+    padding: 10px 10px;
+    text-align: left;
+    float: left;
     max-height: 500px;
     overflow: scroll;
   }
 
-.grid-item {
-    background-color: #182b49;
+
+.subscribe {
+
+    /* max-width: 100%; */
+    background-image: url(https://www.ucsd.edu/_resources/img/bg-orbs-1.jpg);
     color: white;
     padding: 20px;
-    font-size: 30px;
-    text-align: center;
   }
 
 
  @media screen and (max-width: 800px) {
 
-    .nav {
+    ul {
         display: none;
     }   
 
-    .header {
+    .logo {
         max-width: 75%;
     }
 
@@ -100,7 +116,7 @@ ul {
     }
 
     .grid-container {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: auto auto;
     }   
     
  }
