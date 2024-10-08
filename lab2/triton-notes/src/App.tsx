@@ -1,10 +1,11 @@
 import "./App.css";
 import { Label, Note } from "./types"; // Import the Label type from the appropriate module
 import { dummyNotesList } from "./constants"; // Import the dummyNotesList from the appropriate module
-import { useState } from "react"; // Import the useState hook
-import ToggleTheme from "./hooksExercise";
+import { useContext, useState } from "react"; // Import the useState hook
+// import ToggleTheme from "./hooksExercise";
+import { ThemeContext, themes } from "./themeContext";
 
-function App() {
+export function App() {
   const [notes, setNotes] = useState<Note[]>(dummyNotesList);
   const [favorites, setFavorites] = useState<string[]>([]);
   const [newNote, setNewNote] = useState<Note>({
@@ -48,9 +49,15 @@ function App() {
   const handleDelete = (noteId: number) => {
     setNotes(notes.filter((note) => note.id !== noteId));
   };
+  const theme = useContext(ThemeContext);
 
   return (
-    <div className="app-container">
+    <div className="app-container"
+    style={{
+      background: theme.background,
+      color: theme.foreground,
+      padding: "20px",
+    }}>
       <form className="note-form" onSubmit={createNoteHandler}>
         <div>
           <input
@@ -95,16 +102,19 @@ function App() {
 
       <div className="notes-grid">
         {notes.map((note) => (
-          <div key={note.id} className="note-item">
+          <div key={note.id} className="note-item"
+          style={{ background: theme.background, color: theme.foreground }}>
             <div className="notes-header">
-              <button onClick={() => handleLike(note.id)}>
+              <button onClick={() => handleLike(note.id)}
+                style={{ background: theme.background, color: theme.foreground }}>
                 {favorites.includes(note.id.toString()) ? (
                   <span>&#9829;</span>
                 ) : (
                   <span>&#9825;</span>
                 )}
               </button>
-              <button onClick={() => handleDelete(note.id)}>
+              <button onClick={() => handleDelete(note.id)}
+                style={{ background: theme.background, color: theme.foreground }}>
                 X
               </button>
             </div>
@@ -164,10 +174,25 @@ function App() {
           ))}
         </ul>
       </div>
-      <ToggleTheme />
+      {/* <ToggleTheme /> */}
     </div>
   );
 }
 
-export default App;
+function ToggleTheme() {
+  const [currentTheme, setCurrentTheme] = useState(themes.light);
+ 
+  const toggleTheme = () => {
+    setCurrentTheme(currentTheme === themes.light ? themes.dark : themes.light);
+  };
+ 
+  return (
+    <ThemeContext.Provider value={currentTheme}>
+      <App />
+      <button onClick={toggleTheme}> Toggle Theme </button>
+    </ThemeContext.Provider>
+  );
+ }
+ 
+ export default ToggleTheme;
 
