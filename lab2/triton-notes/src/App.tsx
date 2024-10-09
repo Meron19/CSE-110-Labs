@@ -62,6 +62,9 @@ export function App() {
         <div>
           <input
             placeholder="Note Title"
+            suppressContentEditableWarning
+            onFocus={(event) => (event.target as HTMLElement).style.backgroundColor = "#e0f7fa"}
+            onBlur={(event) => (event.target as HTMLElement).style.backgroundColor = ""}
             onChange={(event) =>
               setNewNote({ ...newNote, title: event.target.value })
             }
@@ -71,6 +74,10 @@ export function App() {
 
         <div>
           <textarea
+            placeholder="Note Content"
+            suppressContentEditableWarning
+            onFocus={(event) => (event.target as HTMLElement).style.backgroundColor = "#e0f7fa"}
+            onBlur={(event) => (event.target as HTMLElement).style.backgroundColor = ""}
             onChange={(event) =>
               setNewNote({ ...newNote, content: event.target.value })
             }
@@ -174,7 +181,6 @@ export function App() {
           ))}
         </ul>
       </div>
-      {/* <ToggleTheme /> */}
     </div>
   );
 }
