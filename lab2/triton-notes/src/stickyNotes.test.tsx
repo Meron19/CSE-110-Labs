@@ -1,144 +1,137 @@
-// import { render, screen, fireEvent } from "@testing-library/react";
-// import { StickyNotes } from "./stickyNotes";
+import { render, screen, fireEvent } from "@testing-library/react";
+import { StickyNotes } from "./stickyNotes";
 
-// describe("Create StickyNote", () => {
-//  test("renders create note form", () => {
-//    render(<StickyNotes />);
-//    const createNoteButton = screen.getByText("Create Note");
-//    expect(createNoteButton).toBeInTheDocument();
-//  });
-
-//  test("creates a new note", () => {
-//    render(<StickyNotes />);
-
-// // Please make sure your sticky note has a title and content input field with the following placeholders.
-//    const createNoteTitleInput = screen.getByPlaceholderText("Note Title");
-//    const createNoteContentTextarea =
-//      screen.getByPlaceholderText("Note Content");
-//    const createNoteButton = screen.getByText("Create Note");
-
-//    fireEvent.change(createNoteTitleInput, { target: { value: "New Note" } });
-//    fireEvent.change(createNoteContentTextarea, {
-//      target: { value: "Note content" },
-//    });
-//    fireEvent.click(createNoteButton);
-
-//    const newNoteTitle = screen.getByText("New Note");
-//    const newNoteContent = screen.getByText("Note content");
-
-//    expect(newNoteTitle).toBeInTheDocument();
-//    expect(newNoteContent).toBeInTheDocument();
-//  });
-// });
-
-// describe("Update Sticky Notes", () => {
-//     test("renders create note form", () => {
-//       render(<StickyNotes />);
+describe("Create StickyNote", () => {
+    test("renders create note form", () => {
+      render(<StickyNotes />);
    
-//       const createNoteButton = screen.getByText("Create Note");
-//       expect(createNoteButton).toBeInTheDocument();
-//     });
+      const createNoteButton = screen.getByText("Create Note");
+      expect(createNoteButton).toBeInTheDocument();
+    });
    
-//     describe("Update Sticky Notes", () => {
-//       test("Update sticky note dummy 1", () => {
-//         render(<StickyNotes />);
-    
-//         const note1Title = screen.getByTestId("note-title-1");
-//         const note1Content = screen.getByTestId("note-content-1");
-    
-//         fireEvent.input(note1Title, { target: { innerHTML: "Updated Title" } });
-//         fireEvent.input(note1Content, { target: { innerHTML: "Updated Content" } });
-    
-//         expect(note1Title).toHaveTextContent("Updated Title");
-//         expect(note1Content).toHaveTextContent("Updated Content");
-//       });
-//     });
-//    });
+    test("creates a new note", () => {
+      render(<StickyNotes />);
    
-//    describe("Delete Sticky Notes", () => {
-//     test("deletes sticky note", () => {
-//       render(<StickyNotes />);
+   // Please make sure your sticky note has a title and content input field with the following placeholders.
+      const createNoteTitleInput = screen.getByPlaceholderText("Note Title");
+      const createNoteContentTextarea =
+        screen.getByPlaceholderText("Note Content");
+      const createNoteButton = screen.getByText("Create Note");
+   
+      fireEvent.change(createNoteTitleInput, { target: { value: "New Note" } });
+      fireEvent.change(createNoteContentTextarea, {
+        target: { value: "Note content" },
+      });
+      fireEvent.click(createNoteButton);
+   
+      const newNoteTitle = screen.getByText("New Note");
+      const newNoteContent = screen.getByText("Note content");
+   
+      expect(newNoteTitle).toBeInTheDocument();
+      expect(newNoteContent).toBeInTheDocument();
+    });
+});
 
-//       const createNoteTitleInput = screen.getByPlaceholderText("Note Title");
-//       const createNoteContentTextarea = screen.getByPlaceholderText("Note Content");
-//       const createNoteButton = screen.getByText("Create Note");
 
-//       fireEvent.change(createNoteTitleInput, { target: { value: "Delete" } });
-//       fireEvent.change(createNoteContentTextarea, { target: { value: "Stuf to Delete" } });
-//       fireEvent.click(createNoteButton);
+describe("Update Sticky Notes", () => {
+   
+       test("Update sticky note dummy 1", () => {
+         render(<StickyNotes />);
+   
+         const note1 = screen.getByText("test note 1 title");
+         const note1content =
+           screen.getByText("test note 1 content");
+   
+         fireEvent.blur(note1, { target: { textContent: "Update Note" } });
+         fireEvent.blur(note1content, {
+           target: { textContent: "Update content" },
+         });
+   
+         const updatedNote1 = screen.getByText("Update Note");
+         const updatedNote1Content = screen.getByText("Update content");
+   
+         expect(updatedNote1).toBeInTheDocument();    
+         expect(updatedNote1Content).toBeInTheDocument();
+       });
+});
 
-//       const noteTitle = screen.getByTestId("note-title-1");
-//       const noteContent = screen.getByTestId("note-content-1");
-//       expect(noteTitle).toBeInTheDocument();
-//       expect(noteContent).toBeInTheDocument();
+describe("Delete Sticky Notes", () => {
+   
+        test("Delete sticky note dummy 1", () => {
+          render(<StickyNotes />);
+   
+          const note1 = screen.getByText("test note 1 title");
+          const note1content = screen.getByText("test note 1 content");
 
-//       const deleteButton = screen.getAllByText("X")[0];
-//       fireEvent.click(deleteButton);
-
-//       expect(noteTitle).not.toBeInTheDocument();
-//       expect(noteContent).not.toBeInTheDocument();
-//     });
-//   });
-
-//   describe("Read Sticky Notes", () => {
-
-//     test("Read sticky note dummy 1", () => {
-//       render(<StickyNotes />);
-
-//       const note1Title = screen.getByTestId("note-title-1");
-//       const note1Content = screen.getByTestId("note-content-1");
-
-//       expect(note1Title).toBeInTheDocument();   
-//       expect(note1Content).toBeInTheDocument();
-//     });
+          const deleteButton = screen.getAllByText("X")[0];
     
-//     test("Read sticky note dummy 2", () => {
-//       render(<StickyNotes />);
+          fireEvent.click(deleteButton);
 
-//       const note2Title = screen.getByTestId("note-title-2");
-//       const note2Content = screen.getByTestId("note-content-2");
+          expect(note1).not.toBeInTheDocument();
+   
+          expect(note1content).not.toBeInTheDocument();
+        });
+});
 
-//       expect(note2Title).toBeInTheDocument();   
-//       expect(note2Content).toBeInTheDocument();
-//     });
+describe("Read Sticky Notes", () => {
 
-//     test("Read sticky note dummy 3", () => {
-//       render(<StickyNotes />);
-
-//       const note3Title = screen.getByTestId("note-title-3");
-//       const note3Content = screen.getByTestId("note-content-3");
-
-//       expect(note3Title).toBeInTheDocument();   
-//       expect(note3Content).toBeInTheDocument();
-//     });
-
-//     test("Read sticky note dummy 4", () => {
-//       render(<StickyNotes />);
-
-//       const note4Title = screen.getByTestId("note-title-4");
-//       const note4Content = screen.getByTestId("note-content-4");
-
-//       expect(note4Title).toBeInTheDocument();   
-//       expect(note4Content).toBeInTheDocument();
-//     });
-
-//     test("Read sticky note dummy 5", () => {
-//       render(<StickyNotes />);
-
-//       const note5Title = screen.getByTestId("note-title-5");
-//       const note5Content = screen.getByTestId("note-content-5");
-
-//       expect(note5Title).toBeInTheDocument();   
-//       expect(note5Content).toBeInTheDocument();
-//     });
-
-//      test("Read sticky note dummy 6", () => {
-//          render(<StickyNotes />);
+        test("Read sticky note dummy 1", () => {
+          render(<StickyNotes />);
+    
+          const note1 = screen.getByText("test note 1 title");
+          const note1content = screen.getByText("test note 1 content");
+    
+          expect(note1).toBeInTheDocument();   
+          expect(note1content).toBeInTheDocument();
+        });
+        
+        test("Read sticky note dummy 2", () => {
+          render(<StickyNotes />);
+    
+          const note2 = screen.getByText("test note 2 title");
+          const note2content = screen.getByText("test note 2 content");
+    
+          expect(note2).toBeInTheDocument();
+          expect(note2content).toBeInTheDocument();
+        });
  
-//          const note6Title = screen.getByTestId("note-title-6");
-//          const note6Content = screen.getByTestId("note-content-6");
-   
-//          expect(note6Title).toBeInTheDocument();   
-//          expect(note6Content).toBeInTheDocument();
-//      });  
-// });
+        test("Read sticky note dummy 3", () => {
+          render(<StickyNotes />);
+    
+          const note3 = screen.getByText("test note 3 title");
+          const note3content = screen.getByText("test note 3 content");
+    
+          expect(note3).toBeInTheDocument();
+          expect(note3content).toBeInTheDocument();
+        });
+ 
+        test("Read sticky note dummy 4", () => {
+          render(<StickyNotes />);
+    
+          const note4 = screen.getByText("test note 4 title");
+          const note4content = screen.getByText("test note 4 content");
+    
+          expect(note4).toBeInTheDocument();
+          expect(note4content).toBeInTheDocument();
+        });
+ 
+        test("Read sticky note dummy 5", () => {
+          render(<StickyNotes />);
+    
+          const note5 = screen.getByText("test note 5 title");
+          const note5content = screen.getByText("test note 5 content");
+    
+          expect(note5).toBeInTheDocument();
+          expect(note5content).toBeInTheDocument();
+        });
+ 
+         test("Read sticky note dummy 6", () => {
+             render(<StickyNotes />);
+     
+             const note6 = screen.getByText("test note 6 title");
+             const note6content = screen.getByText("test note 6 content");
+     
+             expect(note6).toBeInTheDocument();
+             expect(note6content).toBeInTheDocument();
+         });  
+});
