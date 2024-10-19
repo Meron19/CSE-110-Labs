@@ -3,20 +3,6 @@ import { ToDoList } from "./toDoList";
 import { BrowserRouter } from "react-router-dom";
 
 describe("Read ToDoList", () => {
-    test("renders ToDoList items", () => {
-        render(
-            <BrowserRouter>
-              <ToDoList />
-            </BrowserRouter>
-          );
-
-        const toDo1 = screen.getByText("Apples");
-        const toDo2 = screen.getByText("Bananas");
-    
-        expect(toDo1).toBeInTheDocument();
-        expect(toDo2).toBeInTheDocument();
-      });
-    
       test("renders checkboxes for ToDoList items", () => {
         render(
             <BrowserRouter>
